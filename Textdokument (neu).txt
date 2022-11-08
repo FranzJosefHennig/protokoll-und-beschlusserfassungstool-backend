@@ -1,0 +1,70 @@
+-- Table: gso.protokoll
+
+-- DROP TABLE IF EXISTS gso.protokoll;
+
+-- Database: ProbetoDB
+
+-- DROP DATABASE IF EXISTS "ProbetoDB";
+
+CREATE DATABASE "ProbetoDB"
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'German_Germany.1252'
+    LC_CTYPE = 'German_Germany.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+GRANT ALL ON DATABASE "ProbetoDB" TO postgres;
+
+GRANT ALL ON DATABASE "ProbetoDB" TO PUBLIC;
+
+
+
+
+CREATE TABLE IF NOT EXISTS gso.protokoll
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    date timestamp without time zone,
+    description text COLLATE pg_catalog."default",
+    title text COLLATE pg_catalog."default",
+    protokollstatus boolean,
+    konferenz text COLLATE pg_catalog."default",
+    schuljahr date,
+    donedate date,
+    creationdate date,
+    rolle boolean,
+    CONSTRAINT protokoll_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS gso.protokoll
+    OWNER to postgres;
+
+GRANT ALL ON TABLE gso.protokoll TO postgres;
+
+GRANT ALL ON TABLE gso.protokoll TO PUBLIC;
+
+-- Table: gso.top
+
+-- DROP TABLE IF EXISTS gso.top;
+
+CREATE TABLE IF NOT EXISTS gso.top
+(
+    title text COLLATE pg_catalog."default",
+    beschluss text COLLATE pg_catalog."default",
+    id integer NOT NULL,
+    notizen text COLLATE pg_catalog."default",
+    CONSTRAINT top_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS gso.top
+    OWNER to postgres;
+
+GRANT ALL ON TABLE gso.top TO postgres;
+
+GRANT ALL ON TABLE gso.top TO PUBLIC;
