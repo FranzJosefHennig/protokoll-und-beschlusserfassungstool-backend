@@ -1,13 +1,22 @@
 package gso.protokolltool.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "protokoll", schema = "gso", catalog = "ProbetoDB")
 public class ProtokollEntity {
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy="id")
+    private Set<TopEntity> items = new java.util.LinkedHashSet<>();
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
