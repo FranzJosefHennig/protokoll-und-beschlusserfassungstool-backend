@@ -16,6 +16,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProtokollController {
 
     @Autowired
@@ -25,6 +26,7 @@ public class ProtokollController {
 
     @GetMapping("/protokoll")
     @Transactional
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> getAllProtokoll() {
 
         return protokollService.findAll();
@@ -32,12 +34,14 @@ public class ProtokollController {
     }
 
     @PostMapping("/protokoll/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ProtokollEntity createProtokoll(@Validated @RequestBody ProtokollEntity protokoll) {
 
         return protokollService.createProtokoll(protokoll);
     }
 
     @GetMapping("/protokoll/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<ProtokollEntity> getProtokollById(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
@@ -46,6 +50,7 @@ public class ProtokollController {
     }
 
     @PutMapping("/protokoll/update/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     ResponseEntity<ProtokollEntity> updateProtokollInfo(@PathVariable(value = "id") Integer protokollId, @Validated @RequestBody ProtokollEntity protokollInfo) throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + protokollId));
@@ -60,6 +65,7 @@ public class ProtokollController {
     }
 
     @DeleteMapping("protokoll/delete/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Map<String, Boolean> deleteProtokoll(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
@@ -73,6 +79,7 @@ public class ProtokollController {
     }
 
     @GetMapping("protokoll/findbyword/{word}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
         return protokollService.findbyWord(word);

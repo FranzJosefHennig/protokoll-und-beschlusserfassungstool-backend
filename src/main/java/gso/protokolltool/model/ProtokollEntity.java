@@ -50,19 +50,19 @@ public class ProtokollEntity {
     private Boolean rolle;
 
     @Basic
-    @Column(name = "rolle")
+    @Column(name = "raum")
     private String raum;
 
     @Basic
-    @Column(name = "rolle")
+    @Column(name = "beginn")
     private Date beginn;
 
     @Basic
-    @Column(name = "rolle")
+    @Column(name = "ende")
     private Date ende;
 
     @Basic
-    @Column(name = "rolle")
+    @Column(name = "leitung")
     private String leitung;
 
 
@@ -162,16 +162,69 @@ public class ProtokollEntity {
     }
 
 
+    public String getRaum() {
+        return raum;
+    }
+
+    public void setRaum(String raum) {
+        this.raum = raum;
+    }
+
+    public Date getBeginn() {
+        return beginn;
+    }
+
+    public void setBeginn(Date beginn) {
+        this.beginn = beginn;
+    }
+
+    public Date getEnde() {
+        return ende;
+    }
+
+    public void setEnde(Date ende) {
+        this.ende = ende;
+    }
+
+    public String getLeitung() {
+        return leitung;
+    }
+
+    public void setLeitung(String leitung) {
+        this.leitung = leitung;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProtokollEntity protokoll = (ProtokollEntity) o;
-        return id == protokoll.id && Objects.equals(date, protokoll.date) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && Objects.equals(protokollstatus, protokoll.protokollstatus) && Objects.equals(konferenz, protokoll.konferenz) && Objects.equals(schuljahr, protokoll.schuljahr) && Objects.equals(donedate, protokoll.donedate) && Objects.equals(creationdate, protokoll.creationdate) && Objects.equals(rolle, protokoll.rolle);
+        return id == protokoll.id && Objects.equals(tops, protokoll.tops) && Objects.equals(date, protokoll.date) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && Objects.equals(protokollstatus, protokoll.protokollstatus) && Objects.equals(konferenz, protokoll.konferenz) && Objects.equals(schuljahr, protokoll.schuljahr) && Objects.equals(donedate, protokoll.donedate) && Objects.equals(creationdate, protokoll.creationdate) && Objects.equals(rolle, protokoll.rolle) && Objects.equals(raum, protokoll.raum) && Objects.equals(beginn, protokoll.beginn) && Objects.equals(ende, protokoll.ende) && Objects.equals(leitung, protokoll.leitung);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, description, title, protokollstatus, konferenz, schuljahr, donedate, creationdate, rolle);
+        return Objects.hash(tops, id, date, description, title, protokollstatus, konferenz, schuljahr, donedate, creationdate, rolle, raum, beginn, ende, leitung);
+    }
+
+    @Override
+    public String toString() {
+        return "ProtokollEntity{" +
+                "tops=" + tops +
+                ", id=" + id +
+                ", date=" + date +
+                ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
+                ", protokollstatus=" + protokollstatus +
+                ", konferenz='" + konferenz + '\'' +
+                ", schuljahr=" + schuljahr +
+                ", donedate=" + donedate +
+                ", creationdate=" + creationdate +
+                ", rolle=" + rolle +
+                ", raum='" + raum + '\'' +
+                ", beginn=" + beginn +
+                ", ende=" + ende +
+                ", leitung='" + leitung + '\'' +
+                '}';
     }
 }
