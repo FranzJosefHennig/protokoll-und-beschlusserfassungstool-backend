@@ -1,10 +1,12 @@
 package gso.protokolltool.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "top", schema = "gso", catalog = "ProbetoDB")
+@Table(name = "top", schema = "gso", catalog = "ProbetoDBProd")
 public class TopEntity {
     @Basic
     @Column(name = "title")
@@ -19,6 +21,21 @@ public class TopEntity {
     @Basic
     @Column(name = "notizen")
     private String notizen;
+    @Basic
+    @Column(name = "protokoll_id", insertable = false, updatable = false)
+    private Integer protokollId;
+
+    @ManyToOne
+    @JoinColumn(name = "protokoll_id")
+    private ProtokollEntity protokoll;
+
+    public ProtokollEntity getProtokoll() {
+        return protokoll;
+    }
+
+    public void setProtokoll(ProtokollEntity protokoll) {
+        this.protokoll = protokoll;
+    }
 
     public String getTitle() {
         return title;
@@ -52,16 +69,24 @@ public class TopEntity {
         this.notizen = notizen;
     }
 
+    public Integer getProtokollId() {
+        return protokollId;
+    }
+
+    public void setProtokollId(Integer protokollId) {
+        this.protokollId = protokollId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TopEntity topEntity = (TopEntity) o;
-        return id == topEntity.id && Objects.equals(title, topEntity.title) && Objects.equals(beschluss, topEntity.beschluss) && Objects.equals(notizen, topEntity.notizen);
+        TopEntity top = (TopEntity) o;
+        return id == top.id && Objects.equals(title, top.title) && Objects.equals(beschluss, top.beschluss) && Objects.equals(notizen, top.notizen) && Objects.equals(protokollId, top.protokollId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, beschluss, id, notizen);
+        return Objects.hash(title, beschluss, id, notizen, protokollId, protokollId);
     }
 }

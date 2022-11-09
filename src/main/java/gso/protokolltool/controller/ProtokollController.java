@@ -3,6 +3,7 @@ package gso.protokolltool.controller;
 import gso.protokolltool.exception.ResourceNotFoundException;
 import gso.protokolltool.model.ProtokollEntity;
 import gso.protokolltool.service.impl.IProtokollService;
+import gso.protokolltool.service.impl.ITopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,8 +16,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class ProbetoController {
+public class ProtokollController {
 
+    @Autowired
+    ITopService topService;
     @Autowired
     IProtokollService protokollService;
 
@@ -30,6 +33,7 @@ public class ProbetoController {
 
     @PostMapping("/protokoll/create")
     public ProtokollEntity createProtokoll(@Validated @RequestBody ProtokollEntity protokoll) {
+
         return protokollService.createProtokoll(protokoll);
     }
 
@@ -56,7 +60,7 @@ public class ProbetoController {
     }
 
     @DeleteMapping("protokoll/delete/{id}")
-    public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Integer protokollId)
+    public Map<String, Boolean> deleteProtokoll(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + protokollId));

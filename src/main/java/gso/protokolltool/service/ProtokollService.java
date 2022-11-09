@@ -1,7 +1,8 @@
-package gso.protokolltool.service.impl;
+package gso.protokolltool.service;
 
 import gso.protokolltool.model.ProtokollEntity;
 import gso.protokolltool.repository.ProtokollRepository;
+import gso.protokolltool.service.impl.IProtokollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProtokollService implements IProtokollService{
+public class ProtokollService implements IProtokollService {
 
 
     @Autowired

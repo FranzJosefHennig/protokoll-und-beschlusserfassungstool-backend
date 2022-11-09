@@ -1,25 +1,25 @@
 package gso.protokolltool.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "protokoll", schema = "gso", catalog = "ProbetoDB")
+@Table(name = "protokoll", schema = "gso", catalog = "ProbetoDBProd")
 public class ProtokollEntity {
 
-    @Getter
-    @Setter
-    @OneToMany(mappedBy="id")
-    private Set<TopEntity> items = new java.util.LinkedHashSet<>();
+    @OneToMany(mappedBy = "protokoll")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<TopEntity> tops;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @JoinColumn(name = "id")
     private int id;
     @Basic
     @Column(name = "date")
@@ -31,12 +31,6 @@ public class ProtokollEntity {
     @Column(name = "title")
     private String title;
     @Basic
-    @Column(name = "creationdate")
-    private Date creationDate;
-    @Basic
-    @Column(name = "donedate")
-    private Date doneDate;
-    @Basic
     @Column(name = "protokollstatus")
     private Boolean protokollstatus;
     @Basic
@@ -45,6 +39,33 @@ public class ProtokollEntity {
     @Basic
     @Column(name = "schuljahr")
     private Date schuljahr;
+    @Basic
+    @Column(name = "donedate")
+    private Date donedate;
+    @Basic
+    @Column(name = "creationdate")
+    private Date creationdate;
+    @Basic
+    @Column(name = "rolle")
+    private Boolean rolle;
+
+    @Basic
+    @Column(name = "rolle")
+    private String raum;
+
+    @Basic
+    @Column(name = "rolle")
+    private Date beginn;
+
+    @Basic
+    @Column(name = "rolle")
+    private Date ende;
+
+    @Basic
+    @Column(name = "rolle")
+    private String leitung;
+
+
 
     public int getId() {
         return id;
@@ -78,22 +99,6 @@ public class ProtokollEntity {
         this.title = title;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getDoneDate() {
-        return doneDate;
-    }
-
-    public void setDoneDate(Date doneDate) {
-        this.doneDate = doneDate;
-    }
-
     public Boolean getProtokollstatus() {
         return protokollstatus;
     }
@@ -118,16 +123,55 @@ public class ProtokollEntity {
         this.schuljahr = schuljahr;
     }
 
+    public Date getDonedate() {
+        return donedate;
+    }
+
+    public void setDonedate(Date donedate) {
+        this.donedate = donedate;
+    }
+
+    public Date getCreationdate() {
+        return creationdate;
+    }
+
+    public void setCreationdate(Date creationdate) {
+        this.creationdate = creationdate;
+    }
+
+    public Boolean getRolle() {
+        return rolle;
+    }
+
+    public void setRolle(Boolean rolle) {
+        this.rolle = rolle;
+    }
+
+    public List<TopEntity> getTops() {
+        return tops;
+    }
+
+    public void setTops(List<TopEntity> tops) {
+        this.tops = tops;
+        addTops(tops);
+    }
+
+    public void addTops(List<TopEntity> tops){
+        this.tops = tops;
+        tops.forEach(topEntity -> topEntity.setProtokoll(this));
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProtokollEntity protokoll = (ProtokollEntity) o;
-        return id == protokoll.id && Objects.equals(date, protokoll.date) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && Objects.equals(creationDate, protokoll.creationDate) && Objects.equals(doneDate, protokoll.doneDate) && Objects.equals(protokollstatus, protokoll.protokollstatus) && Objects.equals(konferenz, protokoll.konferenz) && Objects.equals(schuljahr, protokoll.schuljahr);
+        return id == protokoll.id && Objects.equals(date, protokoll.date) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && Objects.equals(protokollstatus, protokoll.protokollstatus) && Objects.equals(konferenz, protokoll.konferenz) && Objects.equals(schuljahr, protokoll.schuljahr) && Objects.equals(donedate, protokoll.donedate) && Objects.equals(creationdate, protokoll.creationdate) && Objects.equals(rolle, protokoll.rolle);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, description, title, creationDate, doneDate, protokollstatus, konferenz, schuljahr);
+        return Objects.hash(id, date, description, title, protokollstatus, konferenz, schuljahr, donedate, creationdate, rolle);
     }
 }
