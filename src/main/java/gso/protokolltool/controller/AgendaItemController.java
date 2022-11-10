@@ -15,7 +15,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", allowedHeaders = "*")public class AgendaItemController {
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class AgendaItemController {
 
     @Autowired
     IAgendaItemService agendaItemService;
@@ -72,14 +73,4 @@ import java.util.Map;
         return response;
 
     }
-
-    /*
-    @GetMapping("top/findbyword/{word}")
-    public List<TopEntity> findbyWord(@PathVariable(value = "word") String word) {
-
-        return topService.findbyWord(word);
-
-    }
-
-     */
 }

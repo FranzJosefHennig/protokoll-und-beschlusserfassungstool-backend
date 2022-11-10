@@ -3,7 +3,6 @@ package gso.protokolltool.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gso.protokolltool.enums.ConferenceTypeEnum;
 import gso.protokolltool.enums.ProtocolStatusEnum;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -23,7 +22,7 @@ public class ProtokollEntity {
     @JsonManagedReference
     List<AgendaItemEntity> agendaItems;
 
-    @OneToMany(cascade = CascadeType.ALL,targetEntity = ParticipantsEntity.class)
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = ParticipantsEntity.class)
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     private List<ParticipantsEntity> participants;
@@ -44,6 +43,7 @@ public class ProtokollEntity {
     public ProtokollEntity(List<ParticipantsEntity> participants) {
         this.participants = participants;
     }
+
     public ProtokollEntity() {
 
     }
