@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+
+import static gso.protokolltool.enums.ProtocolStatusEnum.DONE;
 
 @RestController
 @RequestMapping("/api")
@@ -78,7 +77,7 @@ public class ProtokollController {
     public Map<String, Boolean> deleteProtokoll(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + protokollId));
+                .orElseThrow(() -> new ResourceNotFoundException("Protokoll not found for this id :: " + protokollId));
 
         protokollService.deleteProtokoll(protokoll);
         Map<String, Boolean> response = new HashMap<>();
@@ -92,5 +91,17 @@ public class ProtokollController {
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
         return  (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
+    }
+
+    @GetMapping("protokoll/changestatustodone/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ProtokollEntity updateStatus(@PathVariable(value ="id")Integer id) throws ResourceNotFoundException {
+        ProtokollEntity protokoll = protokollService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Protokoll not found for this id :: " + id));
+
+        protokoll.setStatus(DONE);
+        protokollService.updateProtokoll(protokoll);
+
+        return ResponseEntity.ok(protokoll).getBody();
     }
 }
