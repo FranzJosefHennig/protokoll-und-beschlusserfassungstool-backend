@@ -1,7 +1,6 @@
 package gso.protokolltool.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import gso.protokolltool.enums.RoleEnum;
 
 import javax.persistence.*;

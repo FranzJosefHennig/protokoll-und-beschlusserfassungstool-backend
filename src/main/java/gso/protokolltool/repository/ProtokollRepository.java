@@ -22,7 +22,10 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "FROM gso.protokoll " +
                     "WHERE description LIKE " + " %"+ ":word" + "% "  +
                     "or title LIKE " + " %"+ ":word" + "% "  +
-                    "or konferenz LIKE " + " %"+ ":word" + "% "
+                    "or conference_type LIKE " + " %"+ ":word" + "% "+
+                    "or leader LIKE " + " %"+ ":word" + "% "+
+                    "or room LIKE " + " %"+ ":word" + "% "+
+                    "or author LIKE " + " %"+ ":word" + "% "
             ,nativeQuery = true
     )
     List<ProtokollEntity> findbyWord(@Param("word") String word);

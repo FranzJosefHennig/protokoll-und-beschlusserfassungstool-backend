@@ -18,13 +18,21 @@ public class ProtokollEntity {
     @JoinColumn(name = "id")
     private int id;
 
+   //
+   // @Cascade(org.hibernate.annotations.CascadeType.ALL)
+
+    @Column(name = "agendaItems")
     @OneToMany(mappedBy = "protokoll")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<AgendaItemEntity> agendaItems;
 
+   // @OneToMany(mappedBy = "protokoll")
+   // @Cascade(org.hibernate.annotations.CascadeType.ALL)
+
+    @Column(name = "participants")
     @OneToMany(mappedBy = "protokoll")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<ParticipantsEntity> participants;
+
+
 
     @Basic
     @Column(name = "description")
