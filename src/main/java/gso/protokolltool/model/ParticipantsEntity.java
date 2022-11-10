@@ -21,39 +21,6 @@ public class ParticipantsEntity {
     @JsonBackReference
     ProtokollEntity protokoll;
 
-
-    public Long getId() {
-        return participantsId;
-    }
-
-    public void setId(Long id) {
-        this.participantsId = id;
-    }
-
-    public String getFirstName() {
-        return firstname;
-    }
-
-    public void setFirstName(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastname = lastName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRoles(String role) {
-        this.role = role;
-    }
-
     public Long getParticipantsId() {
         return participantsId;
     }
@@ -62,23 +29,36 @@ public class ParticipantsEntity {
         this.participantsId = participantsId;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public ProtokollEntity getProtokoll() {
         return protokoll;
     }
 
     public void setProtokoll(ProtokollEntity protokoll) {
         this.protokoll = protokoll;
-    }
-
-    @Override
-    public String toString() {
-        return "ParticipantsEntity{" +
-                "participantsId=" + participantsId +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", role='" + role + '\'' +
-                ", protokoll=" + protokoll +
-                '}';
     }
 
     @Override
@@ -92,5 +72,16 @@ public class ParticipantsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(participantsId, firstname, lastname, role, protokoll);
+    }
+
+    @Override
+    public String toString() {
+        return "ParticipantsEntity{" +
+                "participantsId=" + participantsId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role='" + role + '\'' +
+                ", protokoll=" + protokoll +
+                '}';
     }
 }

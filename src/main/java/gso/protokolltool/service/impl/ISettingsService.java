@@ -10,7 +10,7 @@ public interface ISettingsService {
     /**
      * Findet alle Settings Informationen fuer den Footer
      *
-     * @return
+     * @return SettingsEntity
      */
    Optional<SettingsEntity> findAll();
 
@@ -19,7 +19,7 @@ public interface ISettingsService {
     /**
      * Updated alle Setting Informationen fuer die jeweilige ID
      * @param settings
-     * @return
+     * @return SettingsEntity
      */
    SettingsEntity updateSettingsById(SettingsEntity settings);
 }

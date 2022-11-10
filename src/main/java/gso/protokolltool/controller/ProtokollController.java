@@ -30,7 +30,6 @@ public class ProtokollController {
     @Transactional
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> getAllProtokoll() {
-
         return protokollService.findAll();
 
     }
