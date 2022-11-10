@@ -17,11 +17,12 @@ public class ProtokollEntity {
     @OneToMany(mappedBy = "protokoll")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JsonBackReference
-    private List<AgendaItemEntity> agendaItems; //agendaItems
-
+    @Column(name = "agendaItems")
+    private List<AgendaItemEntity> agendaItems;
     @OneToMany(mappedBy = "protokoll")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JsonBackReference
+    @Column(name = "participants")
     private List<ParticipantsEntity> participants;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

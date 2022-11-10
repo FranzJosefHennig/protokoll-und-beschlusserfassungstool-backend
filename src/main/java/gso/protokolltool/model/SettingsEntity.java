@@ -53,4 +53,6 @@ public class SettingsEntity {
     public int hashCode() {
         return Objects.hash(schulleiter, stellverteter, id);
     }
+
+
 }
