@@ -6,7 +6,7 @@ import gso.protokolltool.enums.ProtocolStatusEnum;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "protokoll", schema = "gso", catalog = "ProbetoDBProd")
@@ -17,15 +17,15 @@ public class ProtokollEntity {
     @Id
     int id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
-    List<AgendaItemEntity> agendaItems;
+    Set<AgendaItemEntity> agendaItems;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = ParticipantsEntity.class)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
-    private List<ParticipantsEntity> participants;
+    Set<ParticipantsEntity> participants;
 
     private String description;
     private String title;
@@ -40,44 +40,20 @@ public class ProtokollEntity {
     private String meetingEnd;
     private String author;
 
-    public ProtokollEntity(List<ParticipantsEntity> participants) {
-        this.participants = participants;
-    }
-
-    public ProtokollEntity() {
-
-    }
-
-    public void setTops(List<AgendaItemEntity> agendaItems) {
-        this.agendaItems = agendaItems;
-        addAgendaItems(agendaItems);
-    }
-
-    public void addAgendaItems(List<AgendaItemEntity> agendaItems) {
-        this.agendaItems = agendaItems;
-        agendaItems.forEach(agendaItemEntity -> agendaItemEntity.setProtokoll(this));
-    }
-
-    public void setParticipants(List<ParticipantsEntity> participants) {
-        this.participants = participants;
-        addParticipants(participants);
-    }
-
-    public void addParticipants(List<ParticipantsEntity> participants) {
-        this.participants = participants;
-        participants.forEach(participantsEntity -> participantsEntity.setProtokoll(this));
-    }
-
-    public List<AgendaItemEntity> getAgendaItems() {
+    public Set<AgendaItemEntity> getAgendaItems() {
         return agendaItems;
     }
 
-    public void setAgendaItems(List<AgendaItemEntity> agendaItems) {
+    public void setAgendaItems(Set<AgendaItemEntity> agendaItems) {
         this.agendaItems = agendaItems;
     }
 
-    public List<ParticipantsEntity> getParticipants() {
+    public Set<ParticipantsEntity> getParticipants() {
         return participants;
+    }
+
+    public void setParticipants(Set<ParticipantsEntity> participants) {
+        this.participants = participants;
     }
 
     public int getId() {

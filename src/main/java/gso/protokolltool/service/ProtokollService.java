@@ -46,4 +46,12 @@ public class ProtokollService implements IProtokollService {
         return protokollRepository.findByRoleForDisplayFolder(role, word);
     }
 
+    public ProtokollEntity getOnetoUpdate(Integer id){
+       return protokollRepository.getReferenceById(id);
+    }
+
+    public ProtokollEntity saveProtocol(ProtokollEntity protokoll){
+      return protokollRepository.save(protokoll);
+    }
+
 }

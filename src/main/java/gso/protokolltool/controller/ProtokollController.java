@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static gso.protokolltool.enums.ProtocolStatusEnum.DONE;
 
@@ -70,10 +73,8 @@ public class ProtokollController {
 
         protokoll.setAgendaItems(protokollInfo.getAgendaItems());
 
-       // protokoll.setParticipants(protokollInfo.getParticipants());
-
-        final ProtokollEntity updatedProtokoll = protokollService.updateProtokoll(protokoll);
-        return ResponseEntity.ok(updatedProtokoll);
+        protokollService.saveProtocol(protokoll);
+        return ResponseEntity.ok(protokoll);
     }
 
     @DeleteMapping("protokoll/delete/{id}")

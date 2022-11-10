@@ -55,5 +55,19 @@ public interface IProtokollService {
      */
     List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word);
 
+    /**
+     * to get referenced Object to update it
+     * @param id
+     * @return ProtokollEntity
+     */
+    ProtokollEntity getOnetoUpdate(Integer id);
+
+    /**
+     * saves a Protocol
+     * @param protokoll
+     * @return ProtokollEntity
+     */
+    ProtokollEntity saveProtocol(ProtokollEntity protokoll);
+
 }
 
