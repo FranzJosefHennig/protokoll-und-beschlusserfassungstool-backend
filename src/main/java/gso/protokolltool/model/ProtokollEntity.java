@@ -18,57 +18,25 @@ public class ProtokollEntity {
     @JoinColumn(name = "id")
     private int id;
 
-    @Column(name = "agendaItems")
+
     @OneToMany(mappedBy = "protokoll", cascade = CascadeType.ALL)
     private List<AgendaItemEntity> agendaItems;
 
-   // @OneToMany(mappedBy = "protokoll")
-   // @Cascade(org.hibernate.annotations.CascadeType.ALL)
-
-    @Column(name = "participants")
     @OneToMany(mappedBy = "protokoll", cascade = CascadeType.ALL)
     private List<ParticipantsEntity> participants;
 
-
-
-    @Basic
-    @Column(name = "description")
     private String description;
-    @Basic
-    @Column(name = "title")
     private String title;
-    @Basic
-    @Column(name = "status")
     private ProtocolStatusEnum status;
-    @Basic
-    @Column (name = "conferenceType")
     private ConferenceTypeEnum conferenceType;
-    @Basic
-    @Column(name = "schoolYearBeginn")
     private Integer schoolYearBeginn;
-    @Basic
-    @Column(name = "doneDate")
     private Date doneDate;
-    @Basic
-    @Column(name = "creationDate")
     private Date creationDate;
-    @Basic
-    @Column(name = "leader")
     private String leader;
-    @Basic
-    @Column(name = "room")
     private String room;
-    @Basic
-    @Column(name = "meetingStart")
     private Date meetingStart;
-    @Basic
-    @Column(name = "meetingEnd")
     private Date meetingEnd;
-    @Basic
-    @Column(name = "author")
     private String author;
-
-
 
     public ProtokollEntity(List<ParticipantsEntity> participants) {
         this.participants = participants;

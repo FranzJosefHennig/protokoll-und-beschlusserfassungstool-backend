@@ -87,6 +87,6 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
-        return  (Objects.equals(word, null) ? protokollService.findAll() : protokollService.findbyWord(word));
+        return  (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
     }
 }
