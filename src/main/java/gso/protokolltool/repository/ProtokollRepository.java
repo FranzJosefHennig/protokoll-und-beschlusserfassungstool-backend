@@ -18,14 +18,13 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "gso.protokoll.description, " +
                     "gso.protokoll.leader, " +
                     "gso.protokoll.room, " +
-                    "gso.protokoll.title " +
-                    "gso.protokoll.creation_date"+
-                    "gso.prtokoll.done_date" +
-                    "gso.protokoll.title" +
-                    "gso.protokoll.meeting_end" +
-                    "gso.protokoll.meeting_start" +
-                    "gso.protokoll.school_year_beginn"+
-                    "gso.protokoll.status"+
+                    "gso.protokoll.title, " +
+                    "gso.protokoll.creation_date, "+
+                    "gso.prtokoll.done_date, " +
+                    "gso.protokoll.meeting_end, " +
+                    "gso.protokoll.meeting_start, " +
+                    "gso.protokoll.school_year_beginn, "+
+                    "gso.protokoll.status, "+
                     "FROM gso.protokoll " +
                     "WHERE description LIKE " + " %"+ ":word" + "% "  +
                     "or title LIKE " + " %"+ ":word" + "% "  +
@@ -36,3 +35,5 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
     )
     List<ProtokollEntity> findbyWord(@Param("word") String word);
 }
+
+// TODO JOIN Mit TOPS ITEMS
