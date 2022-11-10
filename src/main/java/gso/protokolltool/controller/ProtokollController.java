@@ -88,7 +88,5 @@ public class ProtokollController {
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
         return  (Objects.equals(word, "") ? protokollService.findAll() : protokollService.findbyWord(word));
-
-
     }
 }

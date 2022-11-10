@@ -18,7 +18,7 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "gso.protokoll.description, " +
                     "gso.protokoll.leader, " +
                     "gso.protokoll.room, " +
-                    "gso.protokoll.title, " +
+                    "gso.protokoll.title " +
                     "FROM gso.protokoll " +
                     "WHERE description LIKE " + " %"+ ":word" + "% "  +
                     "or title LIKE " + " %"+ ":word" + "% "  +
