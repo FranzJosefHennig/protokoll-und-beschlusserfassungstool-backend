@@ -65,6 +65,10 @@ public class ProtokollController {
         protokoll.setLeader(protokollInfo.getLeader());
         protokoll.setAuthor(protokollInfo.getAuthor());
 
+        protokoll.setAgendaItems(protokollInfo.getAgendaItems());
+
+        protokoll.setParticipants(protokollInfo.getParticipants());
+
         final ProtokollEntity updatedProtokoll = protokollService.updateProtokoll(protokoll);
         return ResponseEntity.ok(updatedProtokoll);
     }

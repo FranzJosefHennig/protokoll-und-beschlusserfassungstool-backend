@@ -37,8 +37,8 @@ public class ProtokollEntity {
     private Date creationDate;
     private String leader;
     private String room;
-    private Date meetingStart;
-    private Date meetingEnd;
+    private String meetingStart;
+    private String meetingEnd;
     private String author;
 
     public ProtokollEntity(List<ParticipantsEntity> participants) {
@@ -76,7 +76,9 @@ public class ProtokollEntity {
         this.agendaItems = agendaItems;
     }
 
-
+    public List<ParticipantsEntity> getParticipants() {
+        return participants;
+    }
 
     public int getId() {
         return id;
@@ -158,19 +160,19 @@ public class ProtokollEntity {
         this.room = room;
     }
 
-    public Date getMeetingStart() {
+    public String getMeetingStart() {
         return meetingStart;
     }
 
-    public void setMeetingStart(Date meetingStart) {
+    public void setMeetingStart(String meetingStart) {
         this.meetingStart = meetingStart;
     }
 
-    public Date getMeetingEnd() {
+    public String getMeetingEnd() {
         return meetingEnd;
     }
 
-    public void setMeetingEnd(Date meetingEnd) {
+    public void setMeetingEnd(String meetingEnd) {
         this.meetingEnd = meetingEnd;
     }
 
