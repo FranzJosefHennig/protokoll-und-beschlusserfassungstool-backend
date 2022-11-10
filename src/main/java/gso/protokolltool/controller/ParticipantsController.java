@@ -1,6 +1,7 @@
 package gso.protokolltool.controller;
 
 import gso.protokolltool.model.ParticipantsEntity;
+import gso.protokolltool.model.ParticipantsPoolEntity;
 import gso.protokolltool.service.impl.IParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,13 +23,13 @@ public class ParticipantsController {
     @GetMapping("/participants")
     @Transactional
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public List<ParticipantsEntity> getAllParticipants() {
+    public List<ParticipantsPoolEntity> getAllParticipants() {
 
         return participantsService.findAll();
 
     }
 
 }
-// TODO ENDPUNKTERWEITERUNG -> VISIBILTY ENDPUNKT
+// TODO ENDPUNKTERWEITERUNG -> VISIBILTY ENDPUNKT /
 // TODO SQL ANPASSEN DAS ALLES GEFUNDEN WIRD -> JOIN UEBER PARTICIPANTS UND AGENDERITEMS
 // TODO

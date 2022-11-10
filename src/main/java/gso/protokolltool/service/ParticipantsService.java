@@ -1,6 +1,7 @@
 package gso.protokolltool.service;
 
 import gso.protokolltool.model.ParticipantsEntity;
+import gso.protokolltool.model.ParticipantsPoolEntity;
 import gso.protokolltool.repository.ParticipantsRepository;
 import gso.protokolltool.service.impl.IParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ParticipantsService implements IParticipantsService {
     ParticipantsRepository participantsRepository;
 
     @Override
-    public List<ParticipantsEntity> findAll() {
+    public List<ParticipantsPoolEntity> findAll() {
         return participantsRepository.findAll();
     }
 }

@@ -19,21 +19,24 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "gso.protokoll.leader, " +
                     "gso.protokoll.room, " +
                     "gso.protokoll.title, " +
-                    "gso.protokoll.creation_date, "+
+                    "gso.protokoll.creation_date, " +
                     "gso.protokoll.done_date, " +
                     "gso.protokoll.meeting_end, " +
                     "gso.protokoll.meeting_start, " +
-                    "gso.protokoll.school_year_beginn, "+
-                    "gso.protokoll.status "+
+                    "gso.protokoll.school_year_beginn, " +
+                    "gso.protokoll.status " +
                     "FROM gso.protokoll " +
-                    "WHERE description LIKE " + " %"+ ":word" + "% "  +
-                    "or title LIKE " + " %"+ ":word" + "% "  +
-                    "or leader LIKE " + " %"+ ":word" + "% "+
-                    "or room LIKE " + " %"+ ":word" + "% "+
-                    "or author LIKE " + " %"+ ":word" + "% "
-            ,nativeQuery = true
+                    "WHERE description LIKE " + " %" + ":word" + "% " +
+                    "or title LIKE " + " %" + ":word" + "% " +
+                    "or leader LIKE " + " %" + ":word" + "% " +
+                    "or room LIKE " + " %" + ":word" + "% " +
+                    "or author LIKE " + " %" + ":word" + "% "
+            , nativeQuery = true
     )
     List<ProtokollEntity> findbyWord(@Param("word") String word);
+
+   // @Query
+   // List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word);
 }
 
 // TODO JOIN Mit TOPS ITEMS

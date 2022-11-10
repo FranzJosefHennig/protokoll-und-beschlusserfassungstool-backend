@@ -2,7 +2,6 @@ package gso.protokolltool.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import gso.protokolltool.enums.RoleEnum;
 
 import javax.persistence.*;
 
@@ -14,14 +13,15 @@ public class ParticipantsEntity {
     private Long participantsId;
     String firstName;
     String lastName;
-    private RoleEnum roles;
+
+    String role;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     ProtokollEntity protokoll;
 
 
-   public Long getId() {
+    public Long getId() {
         return participantsId;
     }
 
@@ -45,12 +45,12 @@ public class ParticipantsEntity {
         this.lastName = lastName;
     }
 
-    public RoleEnum getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(RoleEnum roles) {
-        this.roles = roles;
+    public void setRoles(String role) {
+        this.role = role;
     }
 
     public Long getParticipantsId() {

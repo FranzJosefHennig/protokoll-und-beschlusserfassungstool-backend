@@ -1,6 +1,6 @@
 package gso.protokolltool.service.impl;
 
-import gso.protokolltool.model.ParticipantsEntity;
+import gso.protokolltool.model.ParticipantsPoolEntity;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ public interface IParticipantsService {
     /**
      * @return all Participants
      */
-    List<ParticipantsEntity> findAll();
+    List<ParticipantsPoolEntity> findAll();
 }

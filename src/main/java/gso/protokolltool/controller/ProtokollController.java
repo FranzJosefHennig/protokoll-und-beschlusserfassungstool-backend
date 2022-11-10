@@ -1,5 +1,6 @@
 package gso.protokolltool.controller;
 
+import gso.protokolltool.enums.RoleEnum;
 import gso.protokolltool.exception.ResourceNotFoundException;
 import gso.protokolltool.model.ProtokollEntity;
 import gso.protokolltool.service.impl.IProtokollService;
@@ -103,5 +104,21 @@ public class ProtokollController {
         protokollService.updateProtokoll(protokoll);
 
         return ResponseEntity.ok(protokoll).getBody();
+    }
+
+    @GetMapping("protokoll/findbyword/{role}/{word}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<ProtokollEntity> findByRoleForDisplayFolder(@PathVariable String role, @PathVariable String word) {
+
+        List<ProtokollEntity> protokollEntities = new ArrayList<>();
+
+        /*
+        protokollService
+        if ()
+        return  (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
+
+    }
+         */
+        return null;
     }
 }
