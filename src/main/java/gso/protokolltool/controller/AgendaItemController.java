@@ -1,8 +1,8 @@
 package gso.protokolltool.controller;
 
 import gso.protokolltool.exception.ResourceNotFoundException;
-import gso.protokolltool.model.TopEntity;
-import gso.protokolltool.service.impl.ITopService;
+import gso.protokolltool.model.AgendaItemEntity;
+import gso.protokolltool.service.impl.IAgendaItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,53 +15,58 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class TopController {
+@CrossOrigin(origins = "*", allowedHeaders = "*")public class AgendaItemController {
 
     @Autowired
-    ITopService topService;
+    IAgendaItemService agendaItemService;
 
 
     @GetMapping("/top")
     @Transactional
-    public List<TopEntity> getAllTop() {
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<AgendaItemEntity> getAllTop() {
 
-        return topService.findAll();
+        return agendaItemService.findAll();
 
     }
 
     @PostMapping("/top/create")
-    public TopEntity createTop(@Validated @RequestBody TopEntity top) {
-        return topService.createTop(top);
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public AgendaItemEntity createTop(@Validated @RequestBody AgendaItemEntity top) {
+        return agendaItemService.createTop(top);
     }
 
     @GetMapping("/top/{id}")
-    public ResponseEntity<TopEntity> getTopById(@PathVariable(value = "id") Integer topId)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<AgendaItemEntity> getTopById(@PathVariable(value = "id") Integer topId)
             throws ResourceNotFoundException {
-        TopEntity top = topService.findById(topId)
+        AgendaItemEntity top = agendaItemService.findById(topId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + topId));
         return ResponseEntity.ok().body(top);
     }
 
     @PutMapping("/top/update/{id}")
-    ResponseEntity<TopEntity> updateTopInfo(@PathVariable(value = "id") Integer topId, @Validated @RequestBody TopEntity topInfo) throws ResourceNotFoundException {
-        TopEntity top = topService.findById(topId)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    ResponseEntity<AgendaItemEntity> updateTopInfo(@PathVariable(value = "id") Integer topId, @Validated @RequestBody AgendaItemEntity topInfo) throws ResourceNotFoundException {
+        AgendaItemEntity top = agendaItemService.findById(topId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + topId));
 
         top.setTitle(topInfo.getTitle());
-        top.setBeschluss(topInfo.getBeschluss());
-        top.setNotizen(topInfo.getNotizen());
+        top.setDecision(topInfo.getDecision());
+        top.setNotes(topInfo.getNotes());
 
-        final TopEntity updatedTop = topService.updateTop(top);
+        final AgendaItemEntity updatedTop = agendaItemService.updateTop(top);
         return ResponseEntity.ok(updatedTop);
     }
 
     @DeleteMapping("top/delete/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public Map<String, Boolean> deleteTop(@PathVariable(value = "id") Integer topId)
             throws ResourceNotFoundException {
-        TopEntity top = topService.findById(topId)
+        AgendaItemEntity top = agendaItemService.findById(topId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + topId));
 
-        topService.deleteTop(top);
+        agendaItemService.deleteTop(top);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;

@@ -1,15 +1,11 @@
 package gso.protokolltool.repository;
 
-import gso.protokolltool.model.TopEntity;
+import gso.protokolltool.model.AgendaItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface TopRepository extends JpaRepository<TopEntity, Integer> {
+public interface AgendaItemRepository extends JpaRepository<AgendaItemEntity, Integer> {
 
     /*
     @Query(

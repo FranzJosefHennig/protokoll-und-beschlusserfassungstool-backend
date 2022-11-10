@@ -9,19 +9,21 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SettingsController {
 
     @Autowired
     ISettingsService settingsService;
 
     @PutMapping("/settings/update/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     ResponseEntity<SettingsEntity> updateProtokollInfo(@PathVariable(value = "id") Integer settingsId, @Validated @RequestBody SettingsEntity settingsInfo) throws ResourceNotFoundException {
         SettingsEntity setting = settingsService.findSettingById(settingsId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + settingsId));
+                .orElseThrow(() -> new ResourceNotFoundException("Settings not found for this id :: " + settingsId));
 
         setting.setSchulleiter(settingsInfo.getSchulleiter());
         setting.setStellverteter(settingsInfo.getStellverteter());
@@ -32,7 +34,8 @@ public class SettingsController {
 
     @GetMapping("/allsettings")
     @Transactional
-    public List<SettingsEntity> getAllProtokoll() {
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public Optional<SettingsEntity> getAllProtokoll() {
 
         return settingsService.findAll();
 

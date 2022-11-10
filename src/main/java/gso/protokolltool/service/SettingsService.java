@@ -6,7 +6,6 @@ import gso.protokolltool.service.impl.ISettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,8 +14,9 @@ public class SettingsService implements ISettingsService {
     @Autowired
     SettingsRepository settingsRepository;
 
-    public List<SettingsEntity> findAll(){
-        return settingsRepository.findAll();
+    // TODO MagicNumber entfernen -> immer erster Auszug aus der DB, da immer nur ein Schulleiter und Stellvertreter
+    public Optional<SettingsEntity> findAll(){
+        return settingsRepository.findById(1);
     }
 
     public Optional<SettingsEntity> findSettingById(Integer id) {
