@@ -1,5 +1,6 @@
 package gso.protokolltool.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gso.protokolltool.enums.ConferenceTypeEnum;
 import gso.protokolltool.enums.ProtocolStatusEnum;
 import org.hibernate.annotations.Cascade;
@@ -15,14 +16,16 @@ public class ProtokollEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @JoinColumn(name = "id")
-    private int id;
+    int id;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "protokoll_id")
+    @JsonManagedReference
+    List<AgendaItemEntity> agendaItems;
 
-    @OneToMany(mappedBy = "protokoll", cascade = CascadeType.ALL)
-    private List<AgendaItemEntity> agendaItems;
-
-    @OneToMany(mappedBy = "protokoll", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,targetEntity = ParticipantsEntity.class)
+    @JoinColumn(name = "protokoll_id")
+    @JsonManagedReference
     private List<ParticipantsEntity> participants;
 
     private String description;
@@ -47,12 +50,22 @@ public class ProtokollEntity {
 
     public void setTops(List<AgendaItemEntity> agendaItems) {
         this.agendaItems = agendaItems;
-        addTops(agendaItems);
+        addAgendaItems(agendaItems);
     }
 
-    public void addTops(List<AgendaItemEntity> agendaItems) {
+    public void addAgendaItems(List<AgendaItemEntity> agendaItems) {
         this.agendaItems = agendaItems;
-        agendaItems.forEach(topEntity -> topEntity.setProtokoll(this));
+        agendaItems.forEach(agendaItemEntity -> agendaItemEntity.setProtokoll(this));
+    }
+
+    public void setParticipants(List<ParticipantsEntity> participants) {
+        this.participants = participants;
+        addParticipants(participants);
+    }
+
+    public void addParticipants(List<ParticipantsEntity> participants) {
+        this.participants = participants;
+        participants.forEach(participantsEntity -> participantsEntity.setProtokoll(this));
     }
 
     public List<AgendaItemEntity> getAgendaItems() {
@@ -62,6 +75,7 @@ public class ProtokollEntity {
     public void setAgendaItems(List<AgendaItemEntity> agendaItems) {
         this.agendaItems = agendaItems;
     }
+
 
 
     public int getId() {
