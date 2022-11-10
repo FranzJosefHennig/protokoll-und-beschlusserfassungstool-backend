@@ -20,7 +20,7 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "gso.protokoll.room, " +
                     "gso.protokoll.title, " +
                     "gso.protokoll.creation_date, "+
-                    "gso.prtokoll.done_date, " +
+                    "gso.protokoll.done_date, " +
                     "gso.protokoll.meeting_end, " +
                     "gso.protokoll.meeting_start, " +
                     "gso.protokoll.school_year_beginn, "+
