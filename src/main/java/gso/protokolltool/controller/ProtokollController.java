@@ -70,7 +70,7 @@ public class ProtokollController {
 
         protokoll.setAgendaItems(protokollInfo.getAgendaItems());
 
-        protokoll.setParticipants(protokollInfo.getParticipants());
+       // protokoll.setParticipants(protokollInfo.getParticipants());
 
         final ProtokollEntity updatedProtokoll = protokollService.updateProtokoll(protokoll);
         return ResponseEntity.ok(updatedProtokoll);
