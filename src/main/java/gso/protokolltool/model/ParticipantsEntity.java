@@ -4,6 +4,7 @@ package gso.protokolltool.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "participants", schema = "gso", catalog = "ProbetoDBProd")
@@ -33,11 +34,11 @@ public class ParticipantsEntity {
         return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstname = firstName;
+    public void setFirstName(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
+    public String getLastname() {
         return lastname;
     }
 
@@ -67,5 +68,29 @@ public class ParticipantsEntity {
 
     public void setProtokoll(ProtokollEntity protokoll) {
         this.protokoll = protokoll;
+    }
+
+    @Override
+    public String toString() {
+        return "ParticipantsEntity{" +
+                "participantsId=" + participantsId +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role='" + role + '\'' +
+                ", protokoll=" + protokoll +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParticipantsEntity that = (ParticipantsEntity) o;
+        return Objects.equals(participantsId, that.participantsId) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(role, that.role) && Objects.equals(protokoll, that.protokoll);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(participantsId, firstname, lastname, role, protokoll);
     }
 }
