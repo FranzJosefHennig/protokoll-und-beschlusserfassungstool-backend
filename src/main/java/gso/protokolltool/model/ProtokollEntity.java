@@ -1,6 +1,5 @@
 package gso.protokolltool.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import gso.protokolltool.enums.ConferenceTypeEnum;
 import gso.protokolltool.enums.ProtocolStatusEnum;
 import org.hibernate.annotations.Cascade;
@@ -8,26 +7,25 @@ import org.hibernate.annotations.Cascade;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "protokoll", schema = "gso", catalog = "ProbetoDBProd")
 public class ProtokollEntity {
 
-    @OneToMany(mappedBy = "protokoll")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JsonBackReference
-    @Column(name = "agendaItems")
-    private List<AgendaItemEntity> agendaItems;
-    @OneToMany(mappedBy = "protokoll")
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @JsonBackReference
-    @Column(name = "participants")
-    private List<ParticipantsEntity> participants;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @JoinColumn(name = "id")
     private int id;
+
+    @OneToMany(mappedBy = "protokoll")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<AgendaItemEntity> agendaItems;
+
+    @OneToMany(mappedBy = "protokoll")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<ParticipantsEntity> participants;
+
     @Basic
     @Column(name = "description")
     private String description;
@@ -65,6 +63,15 @@ public class ProtokollEntity {
     @Column(name = "author")
     private String author;
 
+
+
+    public ProtokollEntity(List<ParticipantsEntity> participants) {
+        this.participants = participants;
+    }
+    public ProtokollEntity() {
+
+    }
+
     public void setTops(List<AgendaItemEntity> agendaItems) {
         this.agendaItems = agendaItems;
         addTops(agendaItems);
@@ -83,13 +90,6 @@ public class ProtokollEntity {
         this.agendaItems = agendaItems;
     }
 
-    public List<ParticipantsEntity> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<ParticipantsEntity> participants) {
-        this.participants = participants;
-    }
 
     public int getId() {
         return id;
@@ -193,39 +193,5 @@ public class ProtokollEntity {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ProtokollEntity protokoll = (ProtokollEntity) o;
-        return id == protokoll.id && Objects.equals(agendaItems, protokoll.agendaItems) && Objects.equals(participants, protokoll.participants) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && status == protokoll.status && conferenceType == protokoll.conferenceType && Objects.equals(schoolYearBeginn, protokoll.schoolYearBeginn) && Objects.equals(doneDate, protokoll.doneDate) && Objects.equals(creationDate, protokoll.creationDate) && Objects.equals(leader, protokoll.leader) && Objects.equals(room, protokoll.room) && Objects.equals(meetingStart, protokoll.meetingStart) && Objects.equals(meetingEnd, protokoll.meetingEnd) && Objects.equals(author, protokoll.author);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(agendaItems, participants, id, description, title, status, conferenceType, schoolYearBeginn, doneDate, creationDate, leader, room, meetingStart, meetingEnd, author);
-    }
-
-    @Override
-    public String toString() {
-        return "ProtokollEntity{" +
-                "agendaItems=" + agendaItems +
-                ", participants=" + participants +
-                ", id=" + id +
-                ", description='" + description + '\'' +
-                ", title='" + title + '\'' +
-                ", status=" + status +
-                ", conferenceType=" + conferenceType +
-                ", schoolYearBeginn=" + schoolYearBeginn +
-                ", doneDate=" + doneDate +
-                ", creationDate=" + creationDate +
-                ", leader=" + leader +
-                ", room='" + room + '\'' +
-                ", meetingStart=" + meetingStart +
-                ", meetingEnd=" + meetingEnd +
-                ", author=" + author +
-                '}';
     }
 }

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api")
@@ -86,7 +87,8 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
-        return protokollService.findbyWord(word);
+        return  (Objects.equals(word, "") ? protokollService.findAll() : protokollService.findbyWord(word));
+
 
     }
 }

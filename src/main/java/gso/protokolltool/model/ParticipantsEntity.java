@@ -12,8 +12,8 @@ import java.util.Objects;
 public class ParticipantsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "participantsId", nullable = false)
+    private Long participantsId;
 
     @Basic
     @Column(name = "firstName")
@@ -27,21 +27,16 @@ public class ParticipantsEntity {
     @Column(name = "role")
     private RoleEnum roles;
 
-    @Basic
-    @Column(name = "protokoll_id", insertable = false, updatable = false)
-    private Integer protokollId;
-
-    @ManyToOne
-    @JoinColumn(name = "protokoll_id")
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private ProtokollEntity protokoll;
 
     public Long getId() {
-        return id;
+        return participantsId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.participantsId = id;
     }
 
     public String getFirstName() {
@@ -68,13 +63,6 @@ public class ParticipantsEntity {
         this.roles = roles;
     }
 
-    public Integer getProtokollId() {
-        return protokollId;
-    }
-
-    public void setProtokollId(Integer protokollId) {
-        this.protokollId = protokollId;
-    }
 
     public ProtokollEntity getProtokoll() {
         return protokoll;
@@ -89,22 +77,21 @@ public class ParticipantsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParticipantsEntity that = (ParticipantsEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && roles == that.roles && Objects.equals(protokollId, that.protokollId) && Objects.equals(protokoll, that.protokoll);
+        return Objects.equals(participantsId, that.participantsId) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && roles == that.roles && Objects.equals(protokoll, that.protokoll);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, roles, protokollId, protokoll);
+        return Objects.hash(participantsId, firstName, lastName, roles, protokoll);
     }
 
     @Override
     public String toString() {
         return "ParticipantsEntity{" +
-                "id=" + id +
+                "id=" + participantsId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", roles=" + roles +
-                ", protokollId=" + protokollId +
                 ", protokoll=" + protokoll +
                 '}';
     }

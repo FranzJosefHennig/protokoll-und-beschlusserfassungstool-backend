@@ -13,14 +13,12 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
 
     @Query(
             value = "SELECT gso.protokoll.id, " +
-                    "gso.protokoll.date, " +
+                    "gso.protokoll.author, " +
+                    "gso.protokoll.conference_type, " +
                     "gso.protokoll.description, " +
+                    "gso.protokoll.leader, " +
+                    "gso.protokoll.room, " +
                     "gso.protokoll.title, " +
-                    "gso.protokoll.creationdate, " +
-                    "gso.protokoll.donedate, " +
-                    "gso.protokoll.protokollstatus, " +
-                    "gso.protokoll.schuljahr, " +
-                    "gso.protokoll.konferenz " +
                     "FROM gso.protokoll " +
                     "WHERE description LIKE " + " %"+ ":word" + "% "  +
                     "or title LIKE " + " %"+ ":word" + "% "  +
