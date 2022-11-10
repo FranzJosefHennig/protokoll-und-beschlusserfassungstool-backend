@@ -29,6 +29,15 @@ public class ParticipantsController {
 
     }
 
+    @GetMapping("/participants/bla")
+    @Transactional
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<ParticipantsPoolEntity> getAllParticipantss() {
+
+        return participantsService.findAll();
+
+    }
+
 }
 // TODO ENDPUNKTERWEITERUNG -> VISIBILTY ENDPUNKT /
 // TODO SQL ANPASSEN DAS ALLES GEFUNDEN WIRD -> JOIN UEBER PARTICIPANTS UND AGENDERITEMS

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "participantspool", schema = "gso", catalog = "ProbetoDBProd")
 public class ParticipantsPoolEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
