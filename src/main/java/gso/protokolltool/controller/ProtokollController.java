@@ -50,7 +50,7 @@ public class ProtokollController {
     public ResponseEntity<ProtokollEntity> getProtokollById(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + protokollId));
+                .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + protokollId));
         return ResponseEntity.ok().body(protokoll);
     }
 
@@ -58,13 +58,15 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     ResponseEntity<ProtokollEntity> updateProtokollInfo(@PathVariable(value = "id") Integer protokollId, @Validated @RequestBody ProtokollEntity protokollInfo) throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + protokollId));
+                .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + protokollId));
 
         protokoll.setTitle(protokollInfo.getTitle());
         protokoll.setDescription(protokollInfo.getDescription());
         protokoll.setRoom(protokollInfo.getRoom());
         protokoll.setLeader(protokollInfo.getLeader());
         protokoll.setAuthor(protokollInfo.getAuthor());
+        protokoll.setMeetingEnd(protokoll.getMeetingEnd());
+        protokoll.setMeetingStart(protokoll.getMeetingStart());
 
         protokoll.setAgendaItems(protokollInfo.getAgendaItems());
 
@@ -79,7 +81,7 @@ public class ProtokollController {
     public Map<String, Boolean> deleteProtokoll(@PathVariable(value = "id") Integer protokollId)
             throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
-                .orElseThrow(() -> new ResourceNotFoundException("Protokoll not found for this id :: " + protokollId));
+                .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + protokollId));
 
         protokollService.deleteProtokoll(protokoll);
         Map<String, Boolean> response = new HashMap<>();
@@ -99,7 +101,7 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ProtokollEntity updateStatus(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Protokoll not found for this id :: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + id));
 
         protokoll.setStatus(DONE);
         protokollService.updateProtokoll(protokoll);
