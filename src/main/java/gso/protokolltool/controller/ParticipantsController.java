@@ -1,6 +1,5 @@
 package gso.protokolltool.controller;
 
-import gso.protokolltool.model.ParticipantsEntity;
 import gso.protokolltool.model.ParticipantsPoolEntity;
 import gso.protokolltool.service.impl.IParticipantsService;
 import org.springframework.beans.factory.annotation.Autowired;

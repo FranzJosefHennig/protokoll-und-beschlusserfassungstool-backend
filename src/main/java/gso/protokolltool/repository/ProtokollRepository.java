@@ -26,17 +26,41 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
                     "gso.protokoll.school_year_beginn, " +
                     "gso.protokoll.status " +
                     "FROM gso.protokoll " +
-                    "WHERE description LIKE " + " %" + ":word" + "% " +
-                    "or title LIKE " + " %" + ":word" + "% " +
-                    "or leader LIKE " + " %" + ":word" + "% " +
-                    "or room LIKE " + " %" + ":word" + "% " +
-                    "or author LIKE " + " %" + ":word" + "% "
+                    "JOIN gso.participantspool ON gso.agendaitems.agena_item_id = gso.protokoll.id" +
+                    "WHERE protokoll.description LIKE " + " %" + ":word" + "% " +
+                    "or protokoll.title LIKE " + " %" + ":word" + "% " +
+                    "or protokoll.leader LIKE " + " %" + ":word" + "% " +
+                    "or protokoll.room LIKE " + " %" + ":word" + "% " +
+                    "or protokoll.author LIKE " + " %" + ":word" + "% "+
+            "or agendaitems.decision LIKE " + " %" + ":word" + "% "+
+            "or agendaitems.notes LIKE " + " %" + ":word" + "% "+
+            "or agendaitems.title LIKE " + " %" + ":word" + "% "
             , nativeQuery = true
     )
     List<ProtokollEntity> findbyWord(@Param("word") String word);
 
-   // @Query
-   // List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word);
+    @Query( value = "SELECT gso.protokoll.id, " +
+            "gso.protokoll.author, " +
+            "gso.protokoll.conference_type, " +
+            "gso.protokoll.description, " +
+            "gso.protokoll.leader, " +
+            "gso.protokoll.room, " +
+            "gso.protokoll.title, " +
+            "gso.protokoll.creation_date, " +
+            "gso.protokoll.done_date, " +
+            "gso.protokoll.meeting_end, " +
+            "gso.protokoll.meeting_start, " +
+            "gso.protokoll.school_year_beginn, " +
+            "gso.protokoll.status " +
+            "FROM gso.protokoll " +
+            "JOIN gso.participantspool ON gso.participantspool.id = gso.protokoll.id " +
+            "WHERE gso.participantspool.role = :role " +
+            "or protokoll.title LIKE " + " %" + ":word" + "% " +
+            "or protokoll.leader LIKE " + " %" + ":word" + "% " +
+            "or protokoll.room LIKE " + " %" + ":word" + "% " +
+            "or protokoll.author LIKE " + " %" + ":word" + "% "
+            , nativeQuery = true)
+    List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word);
 }
 
 // TODO JOIN Mit TOPS ITEMS

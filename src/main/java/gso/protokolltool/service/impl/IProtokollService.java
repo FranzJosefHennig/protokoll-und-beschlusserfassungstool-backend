@@ -19,5 +19,7 @@ public interface IProtokollService {
 
     List<ProtokollEntity> findbyWord(String word);
 
+    List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word);
+
 }
 

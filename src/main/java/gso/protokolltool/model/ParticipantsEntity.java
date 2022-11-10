@@ -11,8 +11,8 @@ public class ParticipantsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long participantsId;
-    String firstName;
-    String lastName;
+    String firstname;
+    String lastname;
 
     String role;
 
@@ -30,19 +30,19 @@ public class ParticipantsEntity {
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
 
     public String getRole() {

@@ -1,10 +1,9 @@
 package gso.protokolltool.controller;
 
-import gso.protokolltool.enums.RoleEnum;
 import gso.protokolltool.exception.ResourceNotFoundException;
 import gso.protokolltool.model.ProtokollEntity;
-import gso.protokolltool.service.impl.IProtokollService;
 import gso.protokolltool.service.impl.IAgendaItemService;
+import gso.protokolltool.service.impl.IProtokollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -41,6 +40,9 @@ public class ProtokollController {
     public ProtokollEntity createProtokoll(@Validated @RequestBody ProtokollEntity protokoll) {
 
         protokoll.setCreationDate(Date.valueOf(LocalDate.now()));
+        protokoll.setAgendaItems(protokoll.getAgendaItems());
+        protokoll.setParticipants(protokoll.getParticipants());
+
         return protokollService.createProtokoll(protokoll);
     }
 
@@ -91,12 +93,12 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> findbyWord(@PathVariable(value = "word") String word) {
 
-        return  (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
+        return (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
     }
 
     @GetMapping("protokoll/changestatustodone/{id}")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ProtokollEntity updateStatus(@PathVariable(value ="id")Integer id) throws ResourceNotFoundException {
+    public ProtokollEntity updateStatus(@PathVariable(value = "id") Integer id) throws ResourceNotFoundException {
         ProtokollEntity protokoll = protokollService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Protokoll not found for this id :: " + id));
 
@@ -110,15 +112,12 @@ public class ProtokollController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ProtokollEntity> findByRoleForDisplayFolder(@PathVariable String role, @PathVariable String word) {
 
-        List<ProtokollEntity> protokollEntities = new ArrayList<>();
-
-        /*
-        protokollService
-        if ()
-        return  (Objects.equals(word, "oemerfranzguido") ? protokollService.findAll() : protokollService.findbyWord(word));
+        if (Objects.equals(role, "LEHRER")) {
+            return protokollService.findByRoleForDisplayFolder(role, word);
+        } else {
+            return protokollService.findbyWord(word);
+        }
 
     }
-         */
-        return null;
-    }
+
 }

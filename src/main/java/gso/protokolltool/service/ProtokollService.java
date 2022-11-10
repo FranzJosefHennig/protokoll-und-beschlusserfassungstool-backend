@@ -41,5 +41,9 @@ public class ProtokollService implements IProtokollService {
         return protokollRepository.findbyWord(word);
     }
 
+    @Override
+    public List<ProtokollEntity> findByRoleForDisplayFolder(String role, String word) {
+        return protokollRepository.findByRoleForDisplayFolder(role, word);
+    }
 
 }
