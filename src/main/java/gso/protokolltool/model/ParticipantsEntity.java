@@ -11,7 +11,7 @@ import java.util.Objects;
 public class ParticipantsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long participantsId;
+    private Long id;
     String firstname;
     String lastname;
 
@@ -21,12 +21,12 @@ public class ParticipantsEntity {
     @JsonBackReference
     ProtokollEntity protokoll;
 
-    public Long getParticipantsId() {
-        return participantsId;
+    public Long getId() {
+        return id;
     }
 
-    public void setParticipantsId(Long participantsId) {
-        this.participantsId = participantsId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -66,18 +66,18 @@ public class ParticipantsEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParticipantsEntity that = (ParticipantsEntity) o;
-        return Objects.equals(participantsId, that.participantsId) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(role, that.role) && Objects.equals(protokoll, that.protokoll);
+        return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(role, that.role) && Objects.equals(protokoll, that.protokoll);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(participantsId, firstname, lastname, role, protokoll);
+        return Objects.hash(id, firstname, lastname, role, protokoll);
     }
 
     @Override
     public String toString() {
         return "ParticipantsEntity{" +
-                "participantsId=" + participantsId +
+                "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", role='" + role + '\'' +

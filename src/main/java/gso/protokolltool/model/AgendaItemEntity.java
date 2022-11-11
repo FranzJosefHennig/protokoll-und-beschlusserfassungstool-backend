@@ -3,6 +3,7 @@ package gso.protokolltool.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "agendaitems", schema = "gso", catalog = "ProbetoDBProd")
@@ -65,5 +66,18 @@ public class AgendaItemEntity {
 
     public void setProtokoll(ProtokollEntity protokoll) {
         this.protokoll = protokoll;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AgendaItemEntity that = (AgendaItemEntity) o;
+        return AgendaItemId == that.AgendaItemId && Objects.equals(title, that.title) && Objects.equals(decision, that.decision) && Objects.equals(notes, that.notes) && Objects.equals(protokoll, that.protokoll);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(AgendaItemId, title, decision, notes, protokoll);
     }
 }

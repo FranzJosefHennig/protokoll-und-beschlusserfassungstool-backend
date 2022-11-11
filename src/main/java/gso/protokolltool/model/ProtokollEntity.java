@@ -6,6 +6,7 @@ import gso.protokolltool.enums.ProtocolStatusEnum;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -17,12 +18,12 @@ public class ProtokollEntity {
     @Id
     int id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<AgendaItemEntity> agendaItems;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<ParticipantsEntity> participants;
@@ -158,5 +159,18 @@ public class ProtokollEntity {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProtokollEntity protokoll = (ProtokollEntity) o;
+        return id == protokoll.id && Objects.equals(agendaItems, protokoll.agendaItems) && Objects.equals(participants, protokoll.participants) && Objects.equals(description, protokoll.description) && Objects.equals(title, protokoll.title) && status == protokoll.status && conferenceType == protokoll.conferenceType && Objects.equals(schoolYearBeginn, protokoll.schoolYearBeginn) && Objects.equals(doneDate, protokoll.doneDate) && Objects.equals(creationDate, protokoll.creationDate) && Objects.equals(leader, protokoll.leader) && Objects.equals(room, protokoll.room) && Objects.equals(meetingStart, protokoll.meetingStart) && Objects.equals(meetingEnd, protokoll.meetingEnd) && Objects.equals(author, protokoll.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, agendaItems, participants, description, title, status, conferenceType, schoolYearBeginn, doneDate, creationDate, leader, room, meetingStart, meetingEnd, author);
     }
 }
