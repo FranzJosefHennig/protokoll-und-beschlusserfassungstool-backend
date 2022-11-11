@@ -21,6 +21,7 @@ public interface ProtokollRepository extends JpaRepository<ProtokollEntity, Inte
           "  ON gso.agendaitems.agenda_item_id = gso.protokoll.id"+
            " WHERE"+
                     " protokoll.title LIKE " + " %" + ":word" + "% " +
+                    "or protokoll.description LIKE " + " %" + ":word" + "% " +
                     "or protokoll.leader LIKE " + " %" + ":word" + "% " +
                     "or protokoll.room LIKE " + " %" + ":word" + "% " +
                     "or protokoll.school_year_beginn LIKE " + " %" + ":word" + "% " +
