@@ -80,4 +80,15 @@ public class AgendaItemEntity {
     public int hashCode() {
         return Objects.hash(AgendaItemId, title, decision, notes, protokoll);
     }
+
+    @Override
+    public String toString() {
+        return "AgendaItemEntity{" +
+                "AgendaItemId=" + AgendaItemId +
+                ", title='" + title + '\'' +
+                ", decision='" + decision + '\'' +
+                ", notes='" + notes + '\'' +
+                ", protokoll=" + protokoll +
+                '}';
+    }
 }
