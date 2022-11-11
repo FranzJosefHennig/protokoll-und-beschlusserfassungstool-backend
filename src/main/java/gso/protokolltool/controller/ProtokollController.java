@@ -68,6 +68,10 @@ public class ProtokollController {
         ProtokollEntity protokoll = protokollService.findById(protokollId)
                 .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + protokollId));
 
+
+        // TODO DELETE der duplicate ID
+        deleteProtokoll(protokollId);
+
         protokoll.setTitle(protokollInfo.getTitle());
         protokoll.setDescription(protokollInfo.getDescription());
         protokoll.setRoom(protokollInfo.getRoom());
