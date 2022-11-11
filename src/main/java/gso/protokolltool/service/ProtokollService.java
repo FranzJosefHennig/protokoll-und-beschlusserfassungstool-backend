@@ -29,13 +29,10 @@ public class ProtokollService implements IProtokollService {
         return protokollRepository.findById(protokollId);
     }
 
-    public ProtokollDto updateProtokoll(ProtokollDto protokollDto) {
+    public ProtokollEntity updateProtokoll(ProtokollEntity protokoll) {
 
-        ProtokollEntity protokollEntity = protokollConverter.convertDtoToEntity(protokollDto);
+     return protokollRepository.save(protokoll);
 
-        protokollEntity = protokollRepository.save(protokollEntity);
-
-        return protokollConverter.convertEntityToDto(protokollEntity);
     }
 
 
@@ -61,13 +58,9 @@ public class ProtokollService implements IProtokollService {
         return protokollRepository.getReferenceById(id);
     }
 
-    public ProtokollDto saveProtocol(ProtokollDto protokollDto) {
+    public ProtokollEntity saveProtocol(ProtokollEntity protokoll) {
 
-        ProtokollEntity protokollEntity = protokollConverter.convertDtoToEntity(protokollDto);
-
-        protokollEntity = protokollRepository.save(protokollEntity);
-
-        return protokollConverter.convertEntityToDto(protokollEntity);
+    return protokollRepository.save(protokoll);
     }
 
 }

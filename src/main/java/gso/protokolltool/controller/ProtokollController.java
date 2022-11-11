@@ -78,7 +78,7 @@ public class ProtokollController {
 
         protokoll.setAgendaItems(protokollInfo.getAgendaItems());
 
-        protokollService.saveProtocol(protokollConverter.convertEntityToDto(protokoll));
+        protokollService.saveProtocol(protokoll);
         return ResponseEntity.ok(protokoll);
     }
 
@@ -110,7 +110,7 @@ public class ProtokollController {
                 .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + id));
 
         protokoll.setStatus(DONE);
-        protokollService.updateProtokoll(protokollConverter.convertEntityToDto(protokoll));
+        protokollService.updateProtokoll(protokoll);
 
         return ResponseEntity.ok(protokoll).getBody();
     }

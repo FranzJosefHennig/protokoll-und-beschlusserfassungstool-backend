@@ -17,7 +17,7 @@ public class ParticipantsEntity {
 
     String role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     ProtokollEntity protokoll;
 

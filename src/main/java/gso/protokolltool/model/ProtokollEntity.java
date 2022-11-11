@@ -19,12 +19,12 @@ public class ProtokollEntity {
     @Id
     int id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<AgendaItemEntity> agendaItems;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<ParticipantsEntity> participants;

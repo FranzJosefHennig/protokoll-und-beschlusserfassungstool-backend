@@ -23,10 +23,10 @@ public interface IProtokollService {
 
     /**
      * Updates Protocoldata incl. Agenda or Participant data
-     * @param protokollDto
+     * @param protokoll
      * @return ProtokollEntity
      */
-    ProtokollDto updateProtokoll(ProtokollDto protokollDto);
+    ProtokollEntity updateProtokoll(ProtokollEntity protokoll);
 
     /**
      * deletes a Protocol
@@ -65,10 +65,10 @@ public interface IProtokollService {
 
     /**
      * saves a Protocol
-     * @param protokollDto
+     * @param protokoll
      * @return ProtokollEntity
      */
-    ProtokollDto saveProtocol(ProtokollDto protokollDto);
+    ProtokollEntity saveProtocol(ProtokollEntity protokoll);
 
 }
 
