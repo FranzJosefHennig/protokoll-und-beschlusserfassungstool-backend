@@ -3,6 +3,7 @@ package gso.protokolltool.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import gso.protokolltool.enums.ConferenceTypeEnum;
 import gso.protokolltool.enums.ProtocolStatusEnum;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -18,12 +19,12 @@ public class ProtokollEntity {
     @Id
     int id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<AgendaItemEntity> agendaItems;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany
     @JoinColumn(name = "protokoll_id")
     @JsonManagedReference
     Set<ParticipantsEntity> participants;
@@ -32,7 +33,7 @@ public class ProtokollEntity {
     private String title;
     private ProtocolStatusEnum status;
     private ConferenceTypeEnum conferenceType;
-    private Integer schoolYearBeginn;
+    private String schoolYearBeginn;
     private Date doneDate;
     private Date creationDate;
     private String leader;
@@ -97,11 +98,11 @@ public class ProtokollEntity {
         this.conferenceType = conferenceType;
     }
 
-    public Integer getSchoolYearBeginn() {
+    public String getSchoolYearBeginn() {
         return schoolYearBeginn;
     }
 
-    public void setSchoolYearBeginn(Integer schoolYearBeginn) {
+    public void setSchoolYearBeginn(String schoolYearBeginn) {
         this.schoolYearBeginn = schoolYearBeginn;
     }
 

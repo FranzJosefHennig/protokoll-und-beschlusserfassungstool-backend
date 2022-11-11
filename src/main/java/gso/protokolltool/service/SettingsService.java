@@ -15,7 +15,7 @@ public class SettingsService implements ISettingsService {
     SettingsRepository settingsRepository;
 
     // TODO MagicNumber entfernen -> immer erster Auszug aus der DB, da immer nur ein Schulleiter und Stellvertreter
-    public Optional<SettingsEntity> findAll(){
+    public Optional<SettingsEntity> findAll() {
         return settingsRepository.findById(1);
     }
 

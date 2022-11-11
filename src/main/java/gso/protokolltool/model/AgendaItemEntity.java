@@ -16,7 +16,7 @@ public class AgendaItemEntity {
     private String decision;
     private String notes;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private ProtokollEntity protokoll;
 

@@ -1,5 +1,6 @@
 package gso.protokolltool.service.impl;
 
+import gso.protokolltool.ProtokollDto;
 import gso.protokolltool.model.ProtokollEntity;
 
 import java.util.List;
@@ -22,10 +23,10 @@ public interface IProtokollService {
 
     /**
      * Updates Protocoldata incl. Agenda or Participant data
-     * @param protokoll
+     * @param protokollDto
      * @return ProtokollEntity
      */
-    ProtokollEntity updateProtokoll(ProtokollEntity protokoll);
+    ProtokollDto updateProtokoll(ProtokollDto protokollDto);
 
     /**
      * deletes a Protocol
@@ -64,10 +65,10 @@ public interface IProtokollService {
 
     /**
      * saves a Protocol
-     * @param protokoll
+     * @param protokollDto
      * @return ProtokollEntity
      */
-    ProtokollEntity saveProtocol(ProtokollEntity protokoll);
+    ProtokollDto saveProtocol(ProtokollDto protokollDto);
 
 }
 

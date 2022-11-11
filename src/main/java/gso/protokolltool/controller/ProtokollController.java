@@ -1,5 +1,7 @@
 package gso.protokolltool.controller;
 
+import gso.protokolltool.ProtokollDto;
+import gso.protokolltool.converter.ProtokollConverter;
 import gso.protokolltool.exception.ResourceNotFoundException;
 import gso.protokolltool.model.ProtokollEntity;
 import gso.protokolltool.service.impl.IAgendaItemService;
@@ -28,6 +30,9 @@ public class ProtokollController {
     IAgendaItemService topService;
     @Autowired
     IProtokollService protokollService;
+
+    @Autowired
+    ProtokollConverter protokollConverter;
 
     @GetMapping("/protokoll")
     @Transactional
@@ -73,7 +78,7 @@ public class ProtokollController {
 
         protokoll.setAgendaItems(protokollInfo.getAgendaItems());
 
-        protokollService.saveProtocol(protokoll);
+        protokollService.saveProtocol(protokollConverter.convertEntityToDto(protokoll));
         return ResponseEntity.ok(protokoll);
     }
 
@@ -105,7 +110,7 @@ public class ProtokollController {
                 .orElseThrow(() -> new ResourceNotFoundException("Protocol not found for this id :: " + id));
 
         protokoll.setStatus(DONE);
-        protokollService.updateProtokoll(protokoll);
+        protokollService.updateProtokoll(protokollConverter.convertEntityToDto(protokoll));
 
         return ResponseEntity.ok(protokoll).getBody();
     }
